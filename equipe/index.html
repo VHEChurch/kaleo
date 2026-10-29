@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kaleo Équipe</title>
+<meta name="theme-color" content="#006C67">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Kaleo Équipe">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="../icons/kaleo-icon-192.png">
+<link rel="apple-touch-icon" href="../icons/kaleo-icon-180.png">
+<style>
+/* Kaleo Équipe : coquille d'application installable autour de l'espace mobilisation (Apps Script). */
+html,body{margin:0;height:100%;background:#006C67;font-family:"Montserrat","Helvetica Neue",Arial,sans-serif;color:#fff}
+iframe{position:fixed;left:0;right:0;bottom:0;top:env(safe-area-inset-top,0px);width:100%;height:calc(100% - env(safe-area-inset-top,0px));border:0;background:#F4F2EF}
+.wait{position:fixed;inset:0;display:grid;place-items:center;text-align:center;padding:24px}
+.wait img{width:96px;height:96px;border-radius:22px;box-shadow:0 14px 30px -14px rgba(0,0,0,.6)}
+.wait p{margin:16px 0 0;font-weight:600;font-size:15px;opacity:.85}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="wait" id="wait"><div><img src="../icons/kaleo-icon-192.png" alt="Kaleo"><p id="msg">Kaleo</p></div></div>
+<iframe id="app" title="Kaleo Équipe" hidden allow="clipboard-write"></iframe>
+<script>
+/* L'URL de l'application Web Apps Script (se termine par /exec). */
+var KALEO_ADMIN_URL = "https://script.google.com/macros/s/AKfycbx19F3p27Jhh6cFZr9mXV6T3C7dYeqpHzt3XzIuWXcr6AE8ZCGxxTj6UMchai_V7niY/exec";
+(function () {
+  var ok = /^https:\/\/script\.google\.com\//.test(KALEO_ADMIN_URL);
+  if (!ok) { document.getElementById("msg").textContent = "Adresse de l'espace mobilisation à configurer."; return; }
+  var f = document.getElementById("app");
+  f.addEventListener("load", function () { document.getElementById("wait").hidden = true; });
+  f.src = KALEO_ADMIN_URL;
+  f.hidden = false;
+})();
+</script>
+</body>
+</html>
